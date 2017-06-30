@@ -6,6 +6,7 @@ Created on Thu Jun 29 23:45:36 2017
 """
 
 import Genetic
+import Fitness
 
 #染色体的类
 class Chrom:
@@ -29,9 +30,9 @@ iterNum = 100  #迭代次数
 chromRange = [[0, 10], [0, 10], [0, 10], [0, 10]]  #染色体范围
 
 #初始染色体
-pop = initialize(pop)
-bestChrom = findBest(pop)  #寻找最优染色体
-pop = calFitness(pop)  #计算适应度
+pop = Genetic.initialize(pop)
+pop = Fitness.calFitness(pop)  #计算适应度
+bestChrom = Genetic.findBest(pop)  #寻找最优染色体
 
 
 
