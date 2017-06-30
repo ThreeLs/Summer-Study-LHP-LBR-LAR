@@ -28,11 +28,17 @@ for i in range(20):
 chromNodes = 4  #染色体节点数（变量个数）
 iterNum = 100  #迭代次数
 chromRange = [[0, 10], [0, 10], [0, 10], [0, 10]]  #染色体范围
+aveFitnessList = []  #平均适应度
+bestFitnessList = []  #最优适应度
+
 
 #初始染色体
-pop = Genetic.initialize(pop)
+pop = Genetic.initialize(pop, chromNodes, chromRange)
 pop = Fitness.calFitness(pop)  #计算适应度
 bestChrom = Genetic.findBest(pop)  #寻找最优染色体
+bestFitnessList.append(bestChrom[chromNodes])  #将当前最优适应度压入列表中
+aveFitnessList.apped(Genetic.calAveFitness(pop, N))  #计算平均适应度
+
 
 
 
