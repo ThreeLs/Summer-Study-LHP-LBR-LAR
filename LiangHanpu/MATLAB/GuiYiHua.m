@@ -1,16 +1,13 @@
-clc, clear
-
-%载入数据
-data = [1002, 987, 1243, 1235; 0.45, 0.34, 0.24, 0.75; 123, 457, 234, 754];
-%%每一行是一个指标，每一列是一种方案
+function newdata = GuiYiHua(data)
 
 
 %归一化
-[l, c] = size(data);
-newData = zeros(l, c);
+[l, c] = size(data); %size()函数，是用来输出data的大小
+newData = zeros(l, c); %zeros()函数，建立一个l行，c列的全零矩阵
+
 %循环每一行
 for i = 1:l
     newData(i,:) = data(i,:) / sum(data(i,:));
 end
 
-newData
+end
