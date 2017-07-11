@@ -1,0 +1,30 @@
+clc,clear
+data=   [0.1937,0.3281,0.0342;
+
+    0.0492,0.2879,0.0413;
+
+    0.1378,0.5643,0.0594;
+
+    0.0999,0.3813,0.1101;
+
+    0.9648,0.5879,0.9907;
+]';
+
+[l,c]=size(data);
+newData=zeros(l,c);
+for i=1:l;
+    newData(i,:)=data(i,:)/sqrt(sum(data(i,:).^2));
+end;
+newData
+S1=ones(1,c);
+S2=ones(1,c);
+C=ones(1,c);
+X1=max(data')';
+X2=min(data')';
+
+for i=1:c;
+    S1(i)=sqrt(sum((newData(:,i)-X1(:,1)).^2));
+    S2(i)=sqrt(sum((newData(:,i)-X2(:,1)).^2));
+end
+C=S2./(S1+S2)
+
