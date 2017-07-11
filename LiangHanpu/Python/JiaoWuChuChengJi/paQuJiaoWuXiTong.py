@@ -114,7 +114,7 @@ class CUMT:
         for i in range(len(items)):
             allGrade = allGrade + myGrade[i]
         
-        if len(items) == 3:
+        if len(items) == 4:
             print '还没出成绩！！！'
 
         else:
@@ -140,5 +140,4 @@ class CUMT:
                 print '无法发送邮件！', e
                     
 
-cumt = CUMT()
-cumt.sendEmail()
+
