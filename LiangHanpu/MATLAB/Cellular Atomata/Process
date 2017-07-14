@@ -1,0 +1,8 @@
+1) 变量
+    1， CellSitu, 一个 M*N 矩阵，用来保存当前所有格点的状态（白色0或者黑色1）。
+    2， XYPoint, 一个 X*2 矩阵，第一列代表黑色点的x坐标，第二列代表黑色点的y坐标。
+
+2) 函数
+    1， Change(CellSitu, XYPoint), 用来改造变换CellSitu矩阵，并输出一个新的CellSitu矩阵。
+    2， Judg([X; Y]), 用来判断在（x, y）坐标点周围有多少个黑色点，并输出一个参数：生或死。
+    3， CellPlot(CellSitu), 作图，并输出动画
