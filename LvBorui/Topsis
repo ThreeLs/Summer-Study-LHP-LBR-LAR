@@ -15,7 +15,6 @@ newData=zeros(l,c);
 for i=1:l;
     newData(i,:)=data(i,:)/sqrt(sum(data(i,:).^2));
 end;
-归一化将行列弄混
 newData
 S1=ones(1,c);
 S2=ones(1,c);
@@ -28,4 +27,4 @@ for i=1:c;
     S2(i)=sqrt(sum((newData(:,i)-X2(:,1)).^2));
 end
 C=S2./(S1+S2)
-忘记加括号，同时没有用./
+
