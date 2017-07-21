@@ -2,7 +2,7 @@ function New=Tation(Chrom,PMul,All,Now,inter)
 [l,c]=size(Chrom);
 
 for i=1:l
-    %%%选择一个变异的染色体
+    %%%选择�?��变异的染色体
     pick=rand;
     while pick==0
         pick=rand;
@@ -14,7 +14,7 @@ for i=1:l
     if pick>PMul
         continue;
     else
-        %%%选择变异的位置
+        %%%选择变异的位�?
         pick=rand;
         while pick==0
             pick=rand;
@@ -32,5 +32,6 @@ for i=1:l
         Chrom(index1,index2)=test(Chrom(index1,index2),inter(:,index2));
     end
 end
+
 New=Chrom;
 end
