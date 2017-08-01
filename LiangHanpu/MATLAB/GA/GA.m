@@ -1,64 +1,68 @@
 clc,clear,close all
 t0 = clock;
 
-%%%绉嶇兢淇℃伅
-N=200; %绉嶇兢鏍锋湰
-iter=10000; %杩唬娆℃暟
-ChromNum=4; %鏌撹壊浣撹妭鐐规暟
-inter=[0 0 0 0; 10 10 10 10]; %鏌撹壊浣撳?鍖洪棿
+%%%种群信息
+N=380; %种群样本
+iter=10000; %迭代次数
+ChromNum=1; %染色体节点数
+inter=[100 ; 1000 ]; %染色体值区间
+GuDingChrom=[100,120,160,270,280,300,310,355,378,487,499,562,589,532,543,654,678,621,659,660,633,688,634,651,698,700,798,735,781,745,800,834,890,901,932,873,802,1000]';
+Chrom=zeros(N,ChromNum); %种群个体染色体
+BestChrom=zeros(1,ChromNum+1); %种群最优染色体
+EveryBest=zeros(1,iter+1); %所有代中的最优适应度
+ChromFitness=zeros(N,1); %每一代种群的适应度
+AvaFit=zeros(1,iter+1); %平均适应度
 
-Chrom=zeros(N,ChromNum); %绉嶇兢涓綋鏌撹壊浣?
-BestChrom=zeros(1,ChromNum+1); %绉嶇兢鏈?紭鏌撹壊浣?
-EveryBest=zeros(1,iter+1); %鎵?湁浠ｄ腑鐨勬渶浼橀?搴斿害
-ChromFitness=zeros(N,1); %姣忎竴浠ｇ缇ょ殑閫傚簲搴?
-AvaFit=zeros(1,iter+1); %骞冲潎閫傚簲搴?
+%%%概率信息
+PCross=0.4;
+PMul=0.6;
 
-%%%姒傜巼淇℃伅
-PCross=0.3;
-PMul=0.2;
-
-%%%鍒濆鍖栫缇?
-Chrom=ProductChrom(N,ChromNum,inter)
-ChromFitness=Fitness(Chrom);
+%%%初始化种群
+Chrom=ProductChrom(N,ChromNum,inter);
+ChromFitness=Fitness(Chrom,GuDingChrom);
 BestChrom=FindBest(ChromFitness,Chrom);
 EveryBest(1)=BestChrom(ChromNum+1);
 AvaFit(1)=sum(ChromFitness)/N;
 
-%%%杩唬
+%%%迭代
 for i=1:iter
+    %%%自然选择(最优)
+    [Chrom,~]=Select(Chrom,ChromFitness,N);
+
+    %%%基因重组
     Chrom=Cross(Chrom,PCross,inter);
     
+    %%%基因变异
     Chrom=Tation(Chrom,PMul,iter,i,inter);
     
-    %%%璁＄畻閫傚簲搴?
-    ChromFitness=Fitness(Chrom);
+    %%%计算适应度
+    ChromFitness=Fitness(Chrom,GuDingChrom);
     
-    %%%瀵绘壘鏈?紭\鍔ｆ煋鑹蹭綋
+    %%%寻找最优\劣染色体
     NewBestChrom=FindBest(ChromFitness,Chrom);
     [WorseChrom,WorseIndex]=FindWorse(ChromFitness,Chrom);
     
-    %%%浠ｆ浛涓婁竴娆′腑鏈?ソ鐨勬煋鑹蹭綋
-    if NewBestChrom(ChromNum+1)>BestChrom(ChromNum+1)
+    %%%代替上一次中最好的染色体
+    if NewBestChrom(ChromNum+1)<BestChrom(ChromNum+1)
         BestChrom=NewBestChrom;
     end
     
-    %%%鏇挎崲鎺夋渶鍔ｇ殑
+    %%%替换掉最劣的
     Chrom(WorseIndex,:)=BestChrom(1:ChromNum);
     ChromFitness(WorseIndex)=BestChrom(ChromNum+1);
     
-    %%%璁板綍姣忎竴浠ｇ殑鏈?ソ閫傚簲搴﹀拰骞冲潎閫傚簲搴?
+    %%%记录每一代的最好适应度和平均适应度
     AvaFit(i+1)=sum(ChromFitness)/N;
     EveryBest(i+1)=BestChrom(ChromNum+1);
 end
 
-%%%浣滃浘
+%%%作图
 X=1:iter+1;
 figure(2)
 plot(X,EveryBest);
 hold on
 plot(X,AvaFit);
-
+legend('最优适应度','平均适应度')
 BestChrom
 
 runTime = etime(clock, t0)
-
