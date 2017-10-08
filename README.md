@@ -13,3 +13,8 @@ We arre learning from each other for Mathematical Modeling contest in this summe
 1，算法相关内容与笔记必须使用LaTeX进行编写；
 2，所有代码（MATLAB, Python, C/C++等）的缩进统一采用Tab键，长度为4；
 3，所有非LaTeX的文本文件的段首缩进同样要求Tab键缩进，长度为4；
+
+#这是一级标题
+
+这是一段话，**所以说**
+$$F=G\dfrac{m_1m_2}{r^2}$$
